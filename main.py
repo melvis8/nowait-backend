@@ -10,6 +10,11 @@ from notifications import router as notifications_router
 from reports import router as reports_router
 
 app = FastAPI(title="Queue Management API")
+import init_db
+
+@app.on_event("startup")
+async def on_startup():
+    await init_db.init()
 
 origins = [
     "http://localhost:4000",
@@ -17,12 +22,13 @@ origins = [
     "http://localhost:5173",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
-    "https://frontent-queue-management-app.onrender.com",
+    "https://nowait-backend.onrender.com", 
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex="https://.*\.onrender\.com", # Allow all Render subdomains
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

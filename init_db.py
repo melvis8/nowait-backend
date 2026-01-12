@@ -33,6 +33,34 @@ async def init() -> None:
         else:
             print(f"Admin user {admin_email} already exists.")
 
+    # Seed Default Queues (Services)
+    async with AsyncSessionLocal() as session:
+        default_queues = [
+            {"nom": "Accueil / Renmseignements", "institution": "Hopital General", "max_capacity": 100},
+            {"nom": "Caisse", "institution": "Hopital General", "max_capacity": 50},
+            {"nom": "Consultation Générale", "institution": "Hopital General", "max_capacity": 30},
+            {"nom": "Pharmacie", "institution": "Hopital General", "max_capacity": 100},
+            {"nom": "Urgence", "institution": "Hopital General", "max_capacity": 10}
+        ]
+        
+        for q_data in default_queues:
+            # Check if queue exists by name
+            from sqlalchemy import select
+            from models import Queue
+            import crud
+            # Simple check
+            q_exist = await session.execute(select(Queue).where(Queue.nom == q_data["nom"]))
+            if not q_exist.scalars().first():
+                print(f"Creating default queue: {q_data['nom']}")
+                await crud.create_queue(
+                    session,
+                    nom=q_data["nom"],
+                    institution=q_data["institution"],
+                    max_capacity=q_data["max_capacity"]
+                )
+            else:
+                print(f"Queue {q_data['nom']} already exists.")
+
 
 if __name__ == "__main__":
     asyncio.run(init())
