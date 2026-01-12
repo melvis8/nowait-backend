@@ -27,8 +27,9 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_origin_regex="https://.*\.onrender\.com", # Allow all Render subdomains
+    # allow_origins=origins,
+    allow_origins=["*"], # TEMPORARY: Allow all origins to debug CORS
+    # allow_origin_regex="https://.*\.onrender\.com", 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

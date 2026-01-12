@@ -16,5 +16,5 @@ ENboDjwr705jLLPwuEDtPI9jz4kvdT86JwwG6N8gnWM8Ldi56SdJEtXrzwtlB/Fe
 nPsBxyK4wW0AvAhed2qldBPTipgzPhqB2gu0jSryil95bKrSmlYJd1Y1XfNHno5D
 xfn5JwgySBIdWWvtOI05gw
 ACCESS_TOKEN_EXPIRE_MINUTES=60
-DATABASE_URL=postgresql+asyncpg://neondb_owner:npg_oiQ9cba8NIgq@ep-square-art-ahl0j67z-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+DATABASE_URL=postgresql+asyncpg://neondb_owner:npg_oiQ9cba8NIgq@ep-square-art-ahl0j67z-pooler.c-3.us-east-1.aws.neon.tech/neondb?ssl=require
 RATE_LIMIT=60
